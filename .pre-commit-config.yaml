@@ -7,7 +7,7 @@ repos:
   - repo: local
     hooks:
       - id: local_hooks
-        name: Check that hooks are included
+        name: All hooks are ran
         language: ruby
         entry: ./check_up_to_date.rb
         pass_filenames: false
