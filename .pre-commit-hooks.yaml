@@ -1,0 +1,14 @@
+- id: ltex
+  name: LTeX grammar check
+  language: script
+  entry: ltex/ltex.sh
+  verbose: true
+  types_or: ['markdown', 'mdx']
+
+- id: actionlint
+  name: Lint github workflows
+  language: golang
+  additional_dependencies:
+    - github.com/rhysd/actionlint/cmd/actionlint@v1.6.25
+  entry: actionlint
+  files: .github/workflows/.*\.yml

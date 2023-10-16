@@ -1,0 +1,30 @@
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: local
+    hooks:
+      - id: local_hooks
+        name: Check that hooks are included
+        language: ruby
+        entry: ./check_up_to_date.rb
+        pass_filenames: false
+        files: ^.pre-commit-(config|hooks)\.yaml$
+
+      - id: ltex
+        name: LTeX grammar check
+        language: script
+        entry: ltex/ltex.sh
+        verbose: true
+        types_or: ['markdown', 'mdx']
+        args: [--client-configuration, ltex-config.json]
+
+      - id: actionlint
+        name: Lint github workflows
+        language: golang
+        additional_dependencies:
+          - github.com/rhysd/actionlint/cmd/actionlint@v1.6.25
+        entry: actionlint
+        files: .github/workflows/.*\.yml

@@ -1,0 +1,33 @@
+name: Tests
+on:
+  push:
+
+defaults:
+  run:
+    working-directory: /app
+
+jobs:
+  check_hooks:
+    name: Check hooks work
+    timeout-minutes: 15
+    runs-on: [self-hosted, m6i-spot]
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install pre-commit
+        run: |
+          apk update && apk add python3 python3-dev py3-pip git go build-base
+          pip install pre-commit --ignore-installed distlib
+          pre-commit install --install-hooks
+
+      - name: Run pre-commit hooks
+        run: |
+          pre-commit run --all-files --show-diff-on-failure
+
+      - name: Check local hooks are up-to-date
+        run: |
+          ./check_up_to_date.rb
