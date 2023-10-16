@@ -2,6 +2,10 @@ name: Tests
 on:
   push:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.ref }}
+  cancel-in-progress: true
+
 defaults:
   run:
     working-directory: /app
