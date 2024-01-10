@@ -10,5 +10,5 @@
   language: golang
   additional_dependencies:
     - github.com/rhysd/actionlint/cmd/actionlint@v1.6.25
-  entry: actionlint
-  files: .github/workflows/.*\.yml
+  entry: ./.pre-commit/actionlint_wrapper.sh
+  files: ^\.github/workflows/.*\.yml
