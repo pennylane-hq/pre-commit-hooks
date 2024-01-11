@@ -22,9 +22,7 @@ repos:
         args: [--client-configuration, ltex-config.json]
 
       - id: actionlint
-        name: Lint github workflows
-        language: golang
-        additional_dependencies:
-          - github.com/rhysd/actionlint/cmd/actionlint@v1.6.25
-        entry: actionlint
-        files: .github/workflows/.*\.yml
+        name: Lint Github workflows
+        language: docker_image
+        entry: rhysd/actionlint:1.6.26
+        files: ^\.github/workflows/.*\.yml$
