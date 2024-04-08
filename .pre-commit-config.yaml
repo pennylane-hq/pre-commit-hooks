@@ -26,3 +26,9 @@ repos:
         language: docker_image
         entry: rhysd/actionlint:1.6.26
         files: ^\.github/workflows/.*\.yml$
+
+      - id: hadolint
+        name: Lint Dockerfiles
+        language: docker_image
+        entry: hadolint/hadolint hadolint
+        files: Dockerfile
