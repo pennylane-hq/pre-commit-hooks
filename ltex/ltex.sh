@@ -7,12 +7,12 @@ set -euo pipefail
 ltex_dir=$(dirname "$0")
 ltex_version=""
 
-ltex_tag=$(cd $ltex_dir; tar -cf - ./ | md5sum  | cut -d' ' -f1)
+ltex_tag=$(cd "$ltex_dir"; tar -cf - ./ | md5sum  | cut -d' ' -f1)
 ltex_version="ltex:$ltex_tag"
 
 (
-  cd $ltex_dir
-  docker inspect "$ltex_version" > /dev/null || docker build . -t "$ltex_version" -t 'ltex:latest'
+  cd "$ltex_dir"
+  docker inspect "$ltex_version" &>/dev/null || docker build . -t "$ltex_version" -t 'ltex:latest' > /dev/null
 )
 
 files_to_clean=()
@@ -38,13 +38,15 @@ for file in "$@"; do
   fi
 done
 
-echo "${files_to_process[@]}" |
+output=$(echo "${files_to_process[@]}" |
   xargs docker run --rm -i \
     --user "$UID" \
     --volume "$(pwd):/src:rw,Z" \
     --workdir /src \
-    "$ltex_version" |
-  sed -E 's|(app/javascript/documentation/.*?\.md):|\1x:|g' || true
+    "$ltex_version" 2>&1 |
+  sed -E 's|(app/javascript/documentation/.*?\.md):|\1x:|g' || true)
+
+echo "$output" | grep "SEVERE: java.io.IOException: Stream closed" >/dev/null || echo "$output"
 
 cleanup
 
