@@ -9,7 +9,7 @@
   name: Lint Github workflows
   language: docker_image
   entry: rhysd/actionlint:1.7.7
-  files: ^\.github/workflows/.*\.yml$
+  files: ^\.github/workflows/.*\.(yml|yaml)$
 
 - id: hadolint
   name: Lint Dockerfiles
