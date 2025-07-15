@@ -14,5 +14,5 @@
 - id: hadolint
   name: Lint Dockerfiles
   language: docker_image
-  entry: hadolint/hadolint hadolint
+  entry: hadolint/hadolint:latest-alpine hadolint
   files: Dockerfile
