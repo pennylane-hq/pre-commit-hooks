@@ -12,7 +12,7 @@ ltex_version="ltex:$ltex_tag"
 
 (
   cd "$ltex_dir"
-  docker inspect "$ltex_version" &>/dev/null || docker build . -t "$ltex_version" -t 'ltex:latest' > /dev/null
+  docker inspect "$ltex_version" &>/dev/null || docker build --load . -t "$ltex_version" -t 'ltex:latest' > /dev/null
 )
 
 files_to_clean=()
