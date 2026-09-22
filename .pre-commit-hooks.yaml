@@ -3,12 +3,12 @@
   language: script
   entry: ltex/ltex.sh
   verbose: true
-  types_or: ['markdown', 'mdx']
+  types_or: ["markdown", "mdx"]
 
 - id: actionlint
   name: Lint Github workflows
   language: docker_image
-  entry: rhysd/actionlint:1.7.12
+  entry: kjanat/actionlint:1.17.0
   files: ^\.github/workflows/.*\.(yml|yaml)$
 
 - id: hadolint
