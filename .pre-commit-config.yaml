@@ -24,6 +24,7 @@ repos:
         language: script
         entry: ltex/ltex.sh
         verbose: true
+        require_serial: true
         types_or: ["markdown", "mdx"]
         args: [--client-configuration, ltex-config.json]
 
