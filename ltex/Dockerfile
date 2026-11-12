@@ -1,11 +1,11 @@
-FROM openjdk:11.0.16-jre
+FROM eclipse-temurin:21-jre
 
-ARG LTEX_VERSION=16.0.0
+ARG LTEX_VERSION=18.7.0
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN <<EOF
-  wget --quiet https://github.com/valentjn/ltex-ls/releases/download/${LTEX_VERSION}/ltex-ls-${LTEX_VERSION}.tar.gz -O - | tar -xz
-  mv /ltex-ls-${LTEX_VERSION} /ltex-ls
+  wget --quiet https://github.com/ltex-plus/ltex-ls-plus/releases/download/${LTEX_VERSION}/ltex-ls-plus-${LTEX_VERSION}.tar.gz -O - | tar -xz
+  mv /ltex-ls-plus-${LTEX_VERSION} /ltex-ls
 EOF
 
-ENTRYPOINT ["/ltex-ls/bin/ltex-cli"]
+ENTRYPOINT ["/ltex-ls/bin/ltex-cli-plus"]
